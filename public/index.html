@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusPulse · Campus Events</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" data-view="browse"><span class="pulse"></span>CampusPulse</a>
+    <nav>
+      <button class="nav-btn active" data-view="browse">Discover</button>
+      <button class="nav-btn" data-view="mine" id="navMine" hidden>My Events</button>
+      <button class="nav-btn" data-view="organize" id="navOrganize" hidden>Manage Events</button>
+    </nav>
+    <div class="auth-area">
+      <span id="userLabel" class="user-label" hidden></span>
+      <button id="loginBtn" class="btn btn-ghost">Sign in</button>
+      <button id="signupBtn" class="btn btn-primary">Sign up</button>
+      <button id="logoutBtn" class="btn btn-ghost" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Browse -->
+    <section id="view-browse" class="view">
+      <div class="hero">
+        <h1>What's happening on campus?</h1>
+        <p>Find events, grab a spot, and keep track of everything you've joined.</p>
+        <input id="search" type="search" placeholder="Search by event name, category or venue…" aria-label="Search events" />
+      </div>
+      <div id="chips" class="chips" role="tablist" aria-label="Categories"></div>
+      <div id="browseGrid" class="grid"></div>
+    </section>
+
+    <!-- My events -->
+    <section id="view-mine" class="view" hidden>
+      <h2>My registered events</h2>
+      <div id="mineGrid" class="grid"></div>
+    </section>
+
+    <!-- Organizer -->
+    <section id="view-organize" class="view" hidden>
+      <h2>Publish a new event</h2>
+      <form id="eventForm" class="card form-grid">
+        <label>Title<input name="title" required maxlength="120" /></label>
+        <label>Category<select name="category" id="categorySelect" required></select></label>
+        <label>Venue<input name="venue" required maxlength="120" /></label>
+        <label>Date<input name="date" type="date" required /></label>
+        <label>Time<input name="time" type="time" required /></label>
+        <label>Capacity<input name="capacity" type="number" min="1" max="100000" required /></label>
+        <label class="span-2">Description<textarea name="description" rows="3" maxlength="2000"></textarea></label>
+        <div class="span-2"><button class="btn btn-primary" type="submit">Publish event</button></div>
+      </form>
+      <h2>Events you manage</h2>
+      <div id="organizeGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- Auth modal -->
+  <dialog id="authModal">
+    <form id="authForm" method="dialog">
+      <h3 id="authTitle">Sign in</h3>
+      <label id="nameRow">Full name<input name="name" autocomplete="name" /></label>
+      <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+      <label>Password<input name="password" type="password" required minlength="6" autocomplete="current-password" /></label>
+      <p id="authError" class="error" role="alert"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="authCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="authSubmit">Sign in</button>
+      </div>
+      <p class="hint" id="authHint">Demo: student@campuspulse.com / Student@123 · organizer@campuspulse.com / Organizer@123</p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
